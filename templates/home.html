@@ -9,6 +9,11 @@
 
     <h1>Simple test Flask App</h1>
     <p>Current App = {{current_app}}</p>
+    <ul>
+    {% for key, value in server_info.items() %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+    {% endfor %}
+</ul>
 </div>
 
 </body>
