@@ -1,4 +1,5 @@
 import os
+import sys
 
 from flask import Flask, render_template, current_app, request
 
@@ -56,12 +57,15 @@ def list_environment_variables():
 
 @app.route('/')
 def show_gunicorn_conf():
+    conf_contents = "File gunicorn.conf.py not found."
+    conf_contents2 = sys.argv
     try:
         with open('/opt/startup/gunicorn.conf.py', 'r') as conf_file:
             conf_contents = conf_file.read()
-        return render_template('gunicorn_conf.html', conf_contents=conf_contents)
+        return render_template('gunicorn_conf.html', conf_contents=conf_contents, conf_contents2=conf_contents2)
     except FileNotFoundError:
-        return render_template('gunicorn_conf.html', conf_contents="File gunicorn.conf.py not found.")
+        return render_template('gunicorn_conf.html', conf_contents="File gunicorn.conf.py not found.",
+                               conf_contents2=conf_contents2)
 
 
 
