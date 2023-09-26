@@ -59,14 +59,15 @@ def list_environment_variables():
 def show_gunicorn_conf():
     conf_contents = "File gunicorn.conf.py not found."
     conf_contents2 = sys.argv
+    settings_dict = vars(c)
     try:
         with open('/opt/startup/gunicorn.conf.py', 'r') as conf_file:
             conf_contents = conf_file.read()
-        return render_template('gunicorn_conf.html', conf_contents=conf_contents, conf_contents2=conf_contents2)
+        return render_template('gunicorn_conf.html', conf_contents=conf_contents, conf_contents2=conf_contents2,
+                               settings_dict=settings_dict)
     except FileNotFoundError:
         return render_template('gunicorn_conf.html', conf_contents="File gunicorn.conf.py not found.",
                                conf_contents2=conf_contents2)
-
 
 
 if __name__ == '__main__':
