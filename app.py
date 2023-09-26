@@ -3,6 +3,7 @@ import sys
 
 from flask import Flask, render_template, current_app, request
 
+
 from config import Config
 
 app = Flask(__name__)
@@ -67,7 +68,7 @@ def show_gunicorn_conf():
                                settings_dict=settings_dict)
     except FileNotFoundError:
         return render_template('gunicorn_conf.html', conf_contents="File gunicorn.conf.py not found.",
-                               conf_contents2=conf_contents2)
+                               conf_contents2=conf_contents2, settings_dict=settings_dict)
 
 
 if __name__ == '__main__':
