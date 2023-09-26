@@ -43,7 +43,7 @@ def get_settings():
         settings[key] = value
 
     # Выводим настройки в формате JSON
-    return jsonify(settings)
+    return render_template('env_viriables.html', env_variables=settings)
 
 
 @app.route('/env')
