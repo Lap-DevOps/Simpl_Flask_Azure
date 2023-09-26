@@ -1,1 +1,1 @@
-gunicorn --bind=0.0.0.0 --timeout 600 --chdir  app:run
+gunicorn --bind=0.0.0.0:80 --timeout 600 --chdir Simpl_Flask_Azure app:app
