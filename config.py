@@ -3,4 +3,4 @@ class Config:
     SECRET_KEY = 'your_secret_key'
     SECURITY_PASSWORD_SALT = 'kjsdhkjsdkjhkjds'
     SECURITY_PASSWORD_HASH = 'sha512_crypt'
-    PROPAGATE_EXCEPTIONS=True
+    PROPAGATE_EXCEPTIONS = True
