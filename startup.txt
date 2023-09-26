@@ -1,1 +1,1 @@
-gunicorn --timeout 600 --access-logfile '-' --error-logfile '-' -c /opt/startup/gunicorn.conf.py --chdir=/tmp/8dbbebff5abda3d
+gunicorn --bind=0.0.0.0:80 --timeout 600
