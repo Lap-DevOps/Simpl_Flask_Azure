@@ -32,5 +32,11 @@ def home():
     return render_template('home.html', current_app=flask_ins, server_info=server_info)
 
 
+@app.route('/env')
+def list_environment_variables():
+    env_variables = os.environ
+    return render_template('env_viriables.html', env_variables=env_variables)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

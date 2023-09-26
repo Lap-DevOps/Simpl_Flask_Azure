@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Environment Variables</title>
+</head>
+<body>
+<a href="{{url_for('home')}}">Home </a>
+    <h1>Environment Variables</h1>
+    <ul>
+        {% for key, value in env_variables.items() %}
+            <li><strong>{{ key }}</strong>: {{ value }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
