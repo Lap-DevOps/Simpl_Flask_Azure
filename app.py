@@ -59,7 +59,7 @@ def list_environment_variables():
 def show_gunicorn_conf():
     conf_contents = "File gunicorn.conf.py not found."
     conf_contents2 = sys.argv
-    settings_dict = vars(c)
+    settings_dict = os.environ.get('c.')
     try:
         with open('/opt/startup/gunicorn.conf.py', 'r') as conf_file:
             conf_contents = conf_file.read()
