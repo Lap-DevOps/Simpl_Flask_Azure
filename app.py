@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, current_app, request, jsonify
+from flask import Flask, render_template, current_app, request
 
 from config import Config
 
@@ -51,6 +51,16 @@ def get_settings():
 def list_environment_variables():
     env_variables = os.environ
     return render_template('env_viriables.html', env_variables=env_variables)
+
+
+@app.route('/')
+def show_gunicorn_conf():
+    try:
+        with open('/opt/startup/gunicorn.conf.py', 'r') as conf_file:
+            conf_contents = conf_file.read()
+        return render_template('gunicorn_conf.html', conf_contents=conf_contents)
+    except FileNotFoundError:
+        return "File gunicorn.conf.py not found."
 
 
 if __name__ == '__main__':
