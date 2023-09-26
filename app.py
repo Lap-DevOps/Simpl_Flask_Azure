@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask, render_template, current_app, request
+from flask import Flask, render_template, current_app, request, jsonify
+
 from config import Config
 
 app = Flask(__name__)
@@ -32,6 +33,17 @@ def home():
 
     }
     return render_template('home.html', current_app=flask_ins, server_info=server_info)
+
+
+@app.route('/settings')
+def get_settings():
+    # Получаем все настройки Flask из объекта конфигурации
+    settings = {}
+    for key, value in app.config.items():
+        settings[key] = value
+
+    # Выводим настройки в формате JSON
+    return jsonify(settings)
 
 
 @app.route('/env')
