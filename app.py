@@ -1,8 +1,10 @@
 import os
 
 from flask import Flask, render_template, current_app, request
+from config import Config
 
 app = Flask(__name__)
+app.config.from_object(Config)
 
 
 @app.route('/')
@@ -39,4 +41,4 @@ def list_environment_variables():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
