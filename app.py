@@ -55,7 +55,7 @@ def list_environment_variables():
     return render_template('env_viriables.html', env_variables=env_variables)
 
 
-@app.route('/')
+@app.route('/gunicorn')
 def show_gunicorn_conf():
     conf_contents = "File gunicorn.conf.py not found."
     conf_contents2 = sys.argv
