@@ -1,1 +1,1 @@
-gunicorn --bind=0.0.0.0:80 --timeout 600 --chdir Simpl_Flask_Azure app:app
+gunicorn --timeout 600 --access-logfile '-' --error-logfile '-' -c /opt/startup/gunicorn.conf.py --chdir=/tmp/8dbbebff5abda3d
