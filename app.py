@@ -61,7 +61,8 @@ def show_gunicorn_conf():
             conf_contents = conf_file.read()
         return render_template('gunicorn_conf.html', conf_contents=conf_contents)
     except FileNotFoundError:
-        return "File gunicorn.conf.py not found."
+        return render_template('gunicorn_conf.html', conf_contents="File gunicorn.conf.py not found.")
+
 
 
 if __name__ == '__main__':
