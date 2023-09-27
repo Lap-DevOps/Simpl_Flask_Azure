@@ -3,7 +3,7 @@ import sys
 
 from flask import current_app, request, render_template, Blueprint
 
-from blog import app
+
 
 main = Blueprint('main', __name__)
 
@@ -14,14 +14,14 @@ def home():
     server_info = {
         'Server Host': request.host,
         'Server URL Root': request.url_root,
-        'Environment': app.config.get('ENV'),
+        'Environment': current_app.config.get('ENV'),
         'server_software': os.environ.get('SERVER_SOFTWARE'),
-        'port': app.config.get('PORT'),
-        'root_path': app.config.get('root_path'),
-        'DEBUG': app.config.get('DEBUG'),
-        'TESTING': app.config.get('TESTING'),
+        'port': current_app.config.get('PORT'),
+        'root_path': current_app.config.get('root_path'),
+        'DEBUG': current_app.config.get('DEBUG'),
+        'TESTING': current_app.config.get('TESTING'),
         'WERKZEUG_RUN_MAIN': os.environ.get('WERKZEUG_RUN_MAIN'),
-        'ROUTS': app.url_map,
+        'ROUTS': current_app.url_map,
         'wsgi - SERVER_SOFTWARE ': request.environ['SERVER_SOFTWARE'],
         'wsgi - multithread ': request.environ['wsgi.multithread'],
         'wsgi - multiprocess ': request.environ['wsgi.multiprocess'],
@@ -31,7 +31,8 @@ def home():
         'wsgi - SERVER_PORT': request.environ['SERVER_PORT'],
         'wsgi - HTTP_HOST': request.environ['HTTP_HOST'],
         'base_dir': os.path.abspath(os.path.dirname(__file__)),
-        'FLASK_ENV': app.config.from_envvar('FLASK_ENV', silent=True)
+        'FLASK_ENV': current_app.config.from_envvar('FLASK_ENV', silent=True),
+        'FLASK_CONFIG': os.getenv('FLASK_CONFIG') or 'default',
 
     }
     return render_template('main/home.html', current_app=flask_ins, server_info=server_info)
@@ -41,7 +42,7 @@ def home():
 def get_settings():
     # Получаем все настройки Flask из объекта конфигурации
     settings = {}
-    for key, value in app.config.items():
+    for key, value in current_app.config.items():
         settings[key] = value
 
     # Выводим настройки в формате JSON
