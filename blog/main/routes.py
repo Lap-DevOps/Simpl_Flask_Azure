@@ -31,6 +31,7 @@ def home():
         'wsgi - SERVER_PORT': request.environ['SERVER_PORT'],
         'wsgi - HTTP_HOST': request.environ['HTTP_HOST'],
         'base_dir': os.path.abspath(os.path.dirname(__file__)),
+        'FLASK_ENV': app.config.from_envvar('FLASK_ENV', silent=True)
 
     }
     return render_template('main/home.html', current_app=flask_ins, server_info=server_info)
