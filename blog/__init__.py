@@ -1,13 +1,17 @@
+import os
+
 from flask import Flask
 
-from config import Config
+from config import config
 
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+    config_name= os.getenv('FLASK_CONFIG') or 'default'
+    app.config.from_object(config[config_name])
+
     from blog.main.routes import main
-    app.config.from_envvar('FLASK_ENV', silent=True)
+
 
     app.register_blueprint(main)
 
