@@ -5,8 +5,8 @@
     <title>Environment Variables</title>
 </head>
 <body>
-<a href="{{url_for('home')}}">Home </a> <br>
-<a href="{{url_for('get_settings')}}">Flask error</a>
+<a href="{{url_for('main.home')}}">Home </a> <br>
+<a href="{{url_for('main.get_settings')}}">Flask error</a>
     <h1>Environment Variables</h1>
     <ul>
         {% for key, value in env_variables.items() %}

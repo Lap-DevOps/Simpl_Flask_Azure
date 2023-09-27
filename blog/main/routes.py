@@ -3,10 +3,12 @@ import sys
 
 from flask import current_app, request, render_template, Blueprint
 
+from blog import app
+
+main = Blueprint('main', __name__)
 
 
-
-@app.route('/')
+@main.route('/')
 def home():
     flask_ins = current_app
     server_info = {
@@ -31,10 +33,10 @@ def home():
         'base_dir': os.path.abspath(os.path.dirname(__file__)),
 
     }
-    return render_template('home.html', current_app=flask_ins, server_info=server_info)
+    return render_template('main/home.html', current_app=flask_ins, server_info=server_info)
 
 
-@app.route('/settings')
+@main.route('/settings')
 def get_settings():
     # Получаем все настройки Flask из объекта конфигурации
     settings = {}
@@ -42,16 +44,16 @@ def get_settings():
         settings[key] = value
 
     # Выводим настройки в формате JSON
-    return render_template('env_viriables.html', env_variables=settings)
+    return render_template('main/env_viriables.html', env_variables=settings)
 
 
-@app.route('/env')
+@main.route('/env')
 def list_environment_variables():
     env_variables = os.environ
-    return render_template('env_viriables.html', env_variables=env_variables)
+    return render_template('main/env_viriables.html', env_variables=env_variables)
 
 
-@app.route('/gunicorn')
+@main.route('/gunicorn')
 def show_gunicorn_conf():
     conf_contents = "File gunicorn.conf.py not found."
     conf_contents2 = sys.argv
@@ -59,8 +61,8 @@ def show_gunicorn_conf():
     try:
         with open('/opt/startup/gunicorn.conf.py', 'r') as conf_file:
             conf_contents = conf_file.read()
-        return render_template('gunicorn_conf.html', conf_contents=conf_contents, conf_contents2=conf_contents2,
+        return render_template('main/gunicorn_conf.html', conf_contents=conf_contents, conf_contents2=conf_contents2,
                                settings_dict=settings_dict)
     except FileNotFoundError:
-        return render_template('gunicorn_conf.html', conf_contents="File gunicorn.conf.py not found.",
+        return render_template('main/gunicorn_conf.html', conf_contents="File gunicorn.conf.py not found.",
                                conf_contents2=conf_contents2, settings_dict=settings_dict)
